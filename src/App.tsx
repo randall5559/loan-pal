@@ -2,25 +2,21 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import Box from '@material-ui/core/Box/Box';
+import { akitaDevtools } from '@datorama/akita';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
+akitaDevtools();
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Route to="/">
+        <Box display="flex" height="100%">
+          
+        </Box>
+      </Route>
+    </Router>
   );
 }
-
 export default App;
