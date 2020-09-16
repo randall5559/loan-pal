@@ -4,7 +4,7 @@ import { ReactComponent as Logo } from '../logo.svg';
 import { Link } from "react-router-dom";
 import { useStyles } from './styles';
 
-function Header() {
+const Header = () => {
   const classes = useStyles();
 
   return <div>
