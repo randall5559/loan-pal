@@ -1,6 +1,9 @@
 import { makeStyles, Theme } from '@material-ui/core';
 
 export const useStyles = makeStyles((theme: Theme) => ({
+    appbarMobile: {
+        flexDirection: 'row'
+    },
     toolbar: {
         display: 'flex',
         backgroundColor: '#128A98',
@@ -11,7 +14,8 @@ export const useStyles = makeStyles((theme: Theme) => ({
         display: 'flex',
         backgroundColor: '#128A98',
         justifyContent: 'center',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        width: '100%'
     },
     logo: {
         margin: 'auto'
