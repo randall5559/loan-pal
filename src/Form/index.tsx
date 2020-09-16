@@ -6,8 +6,7 @@ import { useFormFacade } from './hooks';
 import { STATES } from '../shared/constants/states.constant';
 import FormRow from './components/FormRow';
 
-
-const Landing = () => {
+const Form = () => {
     const classes = useStyles();
     const [
         anchorEl,
@@ -48,8 +47,4 @@ const Landing = () => {
     );
 }
 
-function FormFields() {
-    
-}
-
-export default Landing;
+export default Form;
