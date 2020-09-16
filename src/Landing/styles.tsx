@@ -6,7 +6,10 @@ export const useStyles = makeStyles((theme: Theme) => ({
         margin: '10px 0',
         padding: 15,
         minWidth: 300,
-        maxWidth: 350,
-        alignSelf: 'center'
+        maxWidth: 350
     },
+    link: {
+        textDecoration: 'none',
+        alignSelf: 'center'
+    }
 }));

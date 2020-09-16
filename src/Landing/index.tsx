@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Button, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
+import { Link } from "react-router-dom";
 
 const Landing = () => {
     const classes = useStyles();
@@ -12,12 +13,16 @@ const Landing = () => {
                     APPLY NOW GET APPROVED IN SECONDS!
                 </Typography>
             </Box>
-            <Button className={classes.button} variant="contained">
-                Check Status
-            </Button>
-            <Button className={classes.button} variant="contained">
-                Apply
-            </Button>
+            <Link className={classes.link} to="/status">
+                <Button className={classes.button} variant="contained">
+                    Check Status
+                </Button>
+            </Link>
+            <Link className={classes.link} to="/form">
+                <Button className={classes.button} variant="contained">
+                    Apply
+                </Button>
+            </Link>
         </Box>
     );
 }
