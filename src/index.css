@@ -15,17 +15,6 @@ body {
   height: 100%;
 }
 
-body::before {    
-  content: "";
-  background-image: url(./loan-bg-image.jpg);
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-  opacity: 0.06;
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
