@@ -14,19 +14,18 @@ type HookProps = [
  * @return {*}  {HookProps}
  */
 export function useSearchFacade(): HookProps {
-    const [state, setState] = React.useState({ columns: [] as any, data: [] as User[] });
+    const [state, setState] = useState({ columns: [] as any, data: [] as User[] });
 
     const getUsers = async() => {
         const snapshot = await usersQuery.getAllUsers();
         const dbData = [] as User[];
 
-        snapshot.forEach((childSnapshot) => {
+        snapshot.forEach((childSnapshot: any) => {
             // var childKey = childSnapshot.key;
             // var childData = childSnapshot.val();
             dbData.push(childSnapshot.val() as User)
         });
 
-        console.log(dbData);
         setState({
             columns: [
                 { title: 'First Name', field: 'firstName' },
@@ -43,6 +42,8 @@ export function useSearchFacade(): HookProps {
             ],
             data: dbData
         })
+
+        console.log('User:', dbData);
     }
 
     useEffect(() => {

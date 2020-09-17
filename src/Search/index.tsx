@@ -1,12 +1,11 @@
 import React, { forwardRef } from 'react';
-import { Box, FormControl, IconButton, InputAdornment, InputLabel, makeStyles, OutlinedInput, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, withStyles } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import MaterialTable from 'material-table';
 
-import { useStyles, StyledTableCell, StyledTableRow } from './styles';
+import { useStyles } from './styles';
 import { useSearchFacade } from './hooks';
 import { User } from '../shared/interfaces/user.interface';
 
-import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
 import Check from '@material-ui/icons/Check';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
@@ -23,7 +22,6 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 
 const tableIcons = {
-    Add: forwardRef((props: any, ref: any) => <AddBox {...props} ref={ref} />),
     Check: forwardRef((props: any, ref: any) => <Check {...props} ref={ref} />),
     Clear: forwardRef((props: any, ref: any) => <Clear {...props} ref={ref} />),
     Delete: forwardRef((props: any, ref: any) => <DeleteOutline {...props} ref={ref} />),
@@ -46,8 +44,6 @@ const SearchList = () => {
     const classes = useStyles();
     const [ state, setState ] = useSearchFacade();
 
-    console.log(state);
-
     return (
         <Box padding={1}>
             <MaterialTable
@@ -55,18 +51,14 @@ const SearchList = () => {
                 icons={tableIcons as any}
                 columns={state.columns as any}
                 data={state.data as User[]}
+                options={{
+                    searchFieldStyle: {
+                        border: 'solid thin white',
+                        borderRadius: '10px',
+                        padding: 5
+                    }
+                }}
                 editable={{
-                    onRowAdd: (newData) =>
-                    new Promise((resolve) => {
-                        setTimeout(() => {
-                        resolve();
-                        setState((prevState: any) => {
-                            const data = [...prevState.data];
-                            data.push(newData);
-                            return { ...prevState, data };
-                        });
-                        }, 600);
-                    }),
                     onRowUpdate: (newData, oldData) =>
                     new Promise((resolve) => {
                         setTimeout(() => {
