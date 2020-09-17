@@ -28,7 +28,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
                 borderColor: 'gray',
             },
             '& input': {
-                color: 'gray'
+                color: 'white'
             },
             '&.Mui-focused input': {
                 color: 'white'
@@ -55,7 +55,11 @@ export const useStyles = makeStyles((theme: Theme) => ({
         marginRight: 15,
         marginLeft: 15,
         textDecoration: 'none',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        '&.Mui-disabled': {
+            backgroundColor: 'gray',
+            opacity: 0.4
+        }
     },
     disclaimerText: {
         color: 'white',
@@ -63,5 +67,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
     },
     typography: {
         padding: theme.spacing(4),
+    },
+    backdrop: {
+        zIndex: theme.zIndex.drawer + 1,
+        color: '#fff',
     }
 }));

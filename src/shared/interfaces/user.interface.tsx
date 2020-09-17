@@ -13,5 +13,5 @@ export interface User {
     socialSecurity: number; 
     preTax: string;
     coBorrower: boolean;
-    status: 'approved' | 'processing' | 'unapproved';
+    status?: 'approved' | 'processing' | 'unapproved';
 }
