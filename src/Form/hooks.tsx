@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { guid } from '@datorama/akita';
+import firebase from 'firebase';
 
 import { usersService } from '../shared/state';
 import { User } from '../shared/interfaces/user.interface';
@@ -19,6 +20,7 @@ type HookProps = [
     Function,
     Function,
     Function,
+    Function,
     Function
 ];
 
@@ -34,15 +36,37 @@ export function useFormFacade(): HookProps {
     const [actives, setActives] = useState({
         firstName: false,
         lastName: false,
+        email: false,
         street: false,
         city: false,
         state: false,
         zip: false,
-        phone: false,
+        phone: true,
         birth: false,
         socialSecurity: false, 
         preTax: false
     });
+
+    const handleFieldChange = (field: string) => (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+        if (field === 'socialSecurity') {
+            const val = (event.target.value).toString();
+            const trimmedVal = val.length > 4 ? val.slice(0, 4) : val; 
+            setUser({ ...user, [field]: trimmedVal });
+        } 
+        else {
+            setUser({ ...user, [field]: event.target.value });
+        }
+
+        const emailExr = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+        if (field === 'email' && emailExr.test(event.target.value)) {
+            setActives({ ...actives, [field]: true });
+        } else {
+            setActives({ ...actives, [field]: true });
+        }
+
+        console.log(actives);
+    };
 
     const createNewUser = () => {
         const id = guid();
@@ -50,6 +74,7 @@ export function useFormFacade(): HookProps {
         const missingKeys = [ 
             'firstName',
             'lastName',
+            'email',
             'street',
             'city',
             'state',
@@ -75,6 +100,24 @@ export function useFormFacade(): HookProps {
             setTimeout(() => {
                 window.location.href = '/';
             }, 3000);
+
+            firebase.auth()
+                .createUserWithEmailAndPassword((user as User).email as string, '2Loanpal4')
+                .then((res) => {
+                    const currentUser = firebase.auth().currentUser;
+
+                    currentUser?.sendEmailVerification().then(function() {
+                        // Email sent.
+                    }).catch(function(error) {
+                        // An error happened.
+                    });
+                })
+                .catch((error) => {
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    console.log('ERRORS:', errorCode, errorMessage);
+                });
         }
     }
 
@@ -93,6 +136,7 @@ export function useFormFacade(): HookProps {
         createNewUser,
         setUser,
         setActives,
-        setOpenSnackBar
+        setOpenSnackBar,
+        handleFieldChange
     ];
 }

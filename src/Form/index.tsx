@@ -25,18 +25,20 @@ const Form = () => {
         createNewUser,
         setUser,
         setActives,
-        setOpenSnackBar
+        setOpenSnackBar,
+        handleFieldChange
     ] = useFormFacade();
 
     
     // returns a mobile or web base layout
     const formRows = (isMobile: boolean)=> (
         <form className={ isMobile ? `${classes.root} ${classes.rootMobile}` : classes.root } noValidate>
-            <FormRow id="first-last-name" error={error} actives={actives}  isMobile={isMobile} user={user} setUser={setUser} setActives={setActives} />
-            <FormRow id="street" error={error} actives={actives} isMobile={isMobile} user={user} setUser={setUser} setActives={setActives} />
-            <FormRow id="city-state-zip" error={error} actives={actives} states={STATES} isMobile={isMobile} user={user} setUser={setUser}setActives={setActives}  />
-            <FormRow id="phone-birth-ss" error={error} actives={actives} isMobile={isMobile} user={user} setUser={setUser} setActives={setActives} />
-            <FormRow id="pre-tax-co-borrower" error={error} actives={actives} classes={classes} isMobile={isMobile} user={user} setUser={setUser} setActives={setActives} />
+            <FormRow id="first-last-name" actives={actives}  isMobile={isMobile} user={user} setActives={setActives} handleFieldChange={handleFieldChange} />
+            <FormRow id="email" actives={actives} isMobile={isMobile} user={user}  setActives={setActives} handleFieldChange={handleFieldChange} />
+            <FormRow id="street" actives={actives} isMobile={isMobile} user={user}  setActives={setActives} handleFieldChange={handleFieldChange} />
+            <FormRow id="city-state-zip" actives={actives} states={STATES} isMobile={isMobile} user={user} setActives={setActives}  handleFieldChange={handleFieldChange} />
+            <FormRow id="phone-birth-ss" actives={actives} isMobile={isMobile} user={user} setActives={setActives} handleFieldChange={handleFieldChange} />
+            <FormRow id="pre-tax-co-borrower" actives={actives} classes={classes} isMobile={isMobile} user={user} setActives={setActives} handleFieldChange={handleFieldChange} />
             <FormRow id="disclaimer-submit"  
                 classes={classes} setAnchorEl={setAnchorEl} setOpen={setOpen} setPlacement={setPlacement} user={user} setUser={setUser}
                 anchorEl={anchorEl} open={open} placement={placement} isMobile={isMobile} createNewUser={createNewUser} actives={actives}
