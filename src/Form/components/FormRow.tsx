@@ -10,36 +10,32 @@ import { User } from '../../shared/interfaces/user.interface';
  * @return {*} 
  */
 const FormRow = (props: any): any => {
-    const { id, classes, isMobile, user, setUser, error, actives, setActives } = props;
+    const { id, classes, isMobile, user, actives, setActives, handleFieldChange } = props;
     const flexDirection = isMobile ? 'column' : 'row';
+    const emailExr = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     
-    const handleChange = (field: string) => (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-        if (field === 'socialSecurity') {
-            const val = (event.target.value).toString();
-            const trimmedVal = val.length > 4 ? val.slice(0, 4) : val; 
-            setUser({ ...user, [field]: trimmedVal });
-        } else {
-            setUser({ ...user, [field]: event.target.value });
-        }
-        setActives({ ...actives, [field]: true });
-    };
-
     switch(id) {
         case 'first-last-name':
             return  <Box display="flex" flexDirection={flexDirection}>
-                        <TextField required id="first-name" label="First Name" variant="outlined" onChange={handleChange('firstName')} 
+                        <TextField required id="first-name" label="First Name" variant="outlined" onChange={handleFieldChange('firstName')} 
                             error={ user.hasOwnProperty('firstName') && user.firstName.length === 0 ? true : false } 
-                            onClick={() => setActives({ ...actives, firstName: true })}
                         />
-                        <TextField required id="last-name" label="Last Name" variant="outlined" onChange={handleChange('lastName')} 
+                        <TextField required id="last-name" label="Last Name" variant="outlined" onChange={handleFieldChange('lastName')} 
                             error={ user.hasOwnProperty('lastName') && user.lastName.length === 0 ? true : false } 
                             onClick={() => setActives({ ...actives, lastName: true })}
                         />
                     </Box>
 
+        case 'email':
+            return  <Box display="flex" flexDirection={flexDirection}>
+                        <TextField required type="email" id="email" label="Email" variant="outlined" onChange={handleFieldChange('email')} 
+                            error={ user.hasOwnProperty('email') && !emailExr.test(user.email) ? true : false } 
+                        />
+                    </Box>
+
         case 'street':
             return  <Box display="flex" flexDirection={flexDirection}>
-                        <TextField required id="street" label="Street (No P.O. Boxes)" variant="outlined" onChange={handleChange('street')} 
+                        <TextField required id="street" label="Street (No P.O. Boxes)" variant="outlined" onChange={handleFieldChange('street')} 
                             error={ user.hasOwnProperty('street') && user.street.length === 0 ? true : false } 
                             onClick={() => setActives({ ...actives, street: true })}
                         />
@@ -49,7 +45,7 @@ const FormRow = (props: any): any => {
             const { states } = props;
 
             return  <Box display="flex" flexDirection={flexDirection}>
-                        <TextField required id="city" label="City" variant="outlined" onChange={handleChange('city')} 
+                        <TextField required id="city" label="City" variant="outlined" onChange={handleFieldChange('city')} 
                             error={ user.hasOwnProperty('city') && user.city.length === 0 ? true : false } 
                             onClick={() => setActives({ ...actives, city: true })}
                         />
@@ -59,7 +55,7 @@ const FormRow = (props: any): any => {
                             select
                             label="State"
                             value={(user as User).state}
-                            onChange ={handleChange('state')}
+                            onChange ={handleFieldChange('state')}
                             SelectProps={{ native: true }}
                             variant="outlined"
                             error={ user.hasOwnProperty('state') && user.state.length === 0 ? true : false } 
@@ -69,7 +65,7 @@ const FormRow = (props: any): any => {
                                 <option key={index} value={state}>{state}</option>
                             ))}
                         </TextField>
-                        <TextField required id="zip" label="Zip" type="number" variant="outlined" onChange={handleChange('zip')} 
+                        <TextField required id="zip" label="Zip" type="number" variant="outlined" onChange={handleFieldChange('zip')} 
                             error={ user.hasOwnProperty('zip') && user.zip.length === 0 ? true : false } 
                             onClick={() => setActives({ ...actives, zip: true })}
                         />
@@ -85,7 +81,7 @@ const FormRow = (props: any): any => {
                                 inputComponent: TextMaskCustom,
                             }}
                             variant="outlined"
-                            onChange={handleChange('phone')}
+                            onChange={handleFieldChange('phone')}
                             error={ user.hasOwnProperty('phone') && user.phone.length === 0 ? true : false } 
                             onClick={() => setActives({ ...actives, phone: true })}
                         />
@@ -98,7 +94,7 @@ const FormRow = (props: any): any => {
                                 shrink: true,
                             }}
                             variant="outlined"
-                            onChange={handleChange('birth')}
+                            onChange={handleFieldChange('birth')}
                             error={ user.hasOwnProperty('birth') && user.birth.length === 0 ? true : false } 
                             onClick={() => setActives({ ...actives, birth: true })}
                         />
@@ -109,7 +105,7 @@ const FormRow = (props: any): any => {
                             type="text" 
                             variant="outlined"
                             inputProps={{ maxLength: 4 }}
-                            onChange={handleChange('socialSecurity')} 
+                            onChange={handleFieldChange('socialSecurity')} 
                             error={ user.hasOwnProperty('socialSecurity') && user.socialSecurity.length === 0 ? true : false } 
                             onClick={() => setActives({ ...actives, socialSecurity: true })}
                         />
@@ -117,7 +113,7 @@ const FormRow = (props: any): any => {
 
         case 'pre-tax-co-borrower':
             return  <Box display="flex" flexDirection={flexDirection}>
-                        <TextField required id="pre-tax" label="Pre-Tax Annual Income" variant="outlined" onChange={handleChange('preTax')}   
+                        <TextField required id="pre-tax" label="Pre-Tax Annual Income" variant="outlined" onChange={handleFieldChange('preTax')}   
                             error={ user.hasOwnProperty('preTax') && user.preTax.length === 0 ? true : false } 
                             onClick={() => setActives({ ...actives, preTax: true })}
                         />
