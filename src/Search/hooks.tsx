@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { User } from '../shared/interfaces/user.interface';
-import { usersQuery } from '../shared/state';
+import { usersQuery, usersService } from '../shared/state';
 
 type HookProps = [
     { data: User[], columns: any },
+    Function,
+    Function,
     Function
 ];
 
@@ -46,6 +48,34 @@ export function useSearchFacade(): HookProps {
         console.log('User:', dbData);
     }
 
+    const onRowUpdate = (newData: User, oldData: User) =>
+        new Promise((resolve) => {
+            setTimeout(() => {
+            resolve();
+            if (oldData) {
+                setState((prevState: any) => {
+                const data = [...prevState.data];
+                data[data.indexOf(oldData)] = newData;
+                return { ...prevState, data };
+                });
+                usersService.updateUserInfo(newData);
+            }
+            }, 600);
+        });
+
+    const onRowDelete = (oldData: User) =>
+        new Promise((resolve) => {
+                setTimeout(() => {
+                resolve();
+                setState((prevState: any) => {
+                    const data = [...prevState.data];
+                    data.splice(data.indexOf(oldData), 1);
+                    return { ...prevState, data };
+                });
+                usersService.removeUser(oldData.id as string);
+            }, 600);
+        });
+
     useEffect(() => {
         getUsers();
     }, []);
@@ -53,6 +83,8 @@ export function useSearchFacade(): HookProps {
 
     return [
         state,
-        setState
+        setState,
+        onRowUpdate,
+        onRowDelete
     ];
 }

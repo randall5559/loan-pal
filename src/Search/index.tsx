@@ -42,7 +42,12 @@ const tableIcons = {
 
 const SearchList = () => {
     const classes = useStyles();
-    const [ state, setState ] = useSearchFacade();
+    const [ 
+        state, 
+        setState,
+        onRowUpdate,
+        onRowDelete 
+    ] = useSearchFacade();
 
     return (
         <Box padding={1}>
@@ -59,123 +64,12 @@ const SearchList = () => {
                     }
                 }}
                 editable={{
-                    onRowUpdate: (newData, oldData) =>
-                    new Promise((resolve) => {
-                        setTimeout(() => {
-                        resolve();
-                        if (oldData) {
-                            setState((prevState: any) => {
-                            const data = [...prevState.data];
-                            data[data.indexOf(oldData)] = newData;
-                            return { ...prevState, data };
-                            });
-                        }
-                        }, 600);
-                    }),
-                    onRowDelete: (oldData) =>
-                    new Promise((resolve) => {
-                        setTimeout(() => {
-                        resolve();
-                        setState((prevState: any) => {
-                            const data = [...prevState.data];
-                            data.splice(data.indexOf(oldData), 1);
-                            return { ...prevState, data };
-                        });
-                        }, 600);
-                    }),
+                    onRowUpdate: onRowUpdate as any,
+                    onRowDelete: onRowDelete as any
                 }}
             />
         </Box>
     );
 }
-
-// const SearchList = () => {
-//     const classes = useStyles();
-//     const [
-//         users,
-//         page, 
-//         rowsPerPage, 
-//         setPage,
-//         setRowsPerPage] = useSearchFacade();
-
-//     const paginationElement = () => (
-//         <TablePagination
-//             className={classes.tablePagination}
-//             rowsPerPageOptions={[5, 10, 25]}
-//             component="div"
-//             count={page}
-//             rowsPerPage={rowsPerPage}
-//             page={page}
-//             onChangePage={(event: any, newPage: any) => {
-//                 setPage(newPage);
-//             }}
-//             onChangeRowsPerPage={(event: any) => {
-//                 setRowsPerPage(parseInt(event.target.value, 10));
-//                 setPage(0);
-//             }}
-//         />
-//     )
-
-//     return (
-//         <Box display="flex" justifyContent="center" flexDirection="column" marginTop={3}>
-//             <form className={classes.root} noValidate>
-//                 <FormControl variant="outlined">
-//                     <InputLabel htmlFor="outlined-adornment-password">Search</InputLabel>
-//                     <OutlinedInput
-//                         id="search-text"
-//                         type="text"
-//                         endAdornment={
-//                         <InputAdornment position="end">
-//                             <IconButton className={classes.iconButton} aria-label="search">
-//                                 <Search fontSize="large" />
-//                             </IconButton>
-//                         </InputAdornment>
-//                         }
-//                         labelWidth={70}
-//                     />
-//                 </FormControl>
-//             </form>
-
-//             {paginationElement()}
-//             <TableContainer>
-//                 <Table className={classes.table} aria-label="customized table">
-//                     <TableHead>
-//                     <TableRow>
-//                         <StyledTableCell>First Name</StyledTableCell>
-//                         <StyledTableCell align="right">Last Name</StyledTableCell>
-//                         <StyledTableCell align="right">Street</StyledTableCell>
-//                         <StyledTableCell align="right">City</StyledTableCell>
-//                         <StyledTableCell align="right">State</StyledTableCell>
-//                         <StyledTableCell align="right">Zip</StyledTableCell>
-//                         <StyledTableCell align="right">Phone</StyledTableCell>
-//                         <StyledTableCell align="right">Birth</StyledTableCell>
-//                         <StyledTableCell align="right">Social Security</StyledTableCell>
-//                         <StyledTableCell align="right">Pre-Tax</StyledTableCell>
-//                         <StyledTableCell align="right">Status</StyledTableCell>
-//                     </TableRow>
-//                     </TableHead>
-//                     <TableBody>
-//                     {users.map((user: User) => (
-//                         <StyledTableRow key={user.id}>
-//                             <StyledTableCell component="th">{user.firstName}</StyledTableCell>
-//                             <StyledTableCell align="right">{user.lastName}</StyledTableCell>
-//                             <StyledTableCell align="right">{user.street}</StyledTableCell>
-//                             <StyledTableCell align="right">{user.city}</StyledTableCell>
-//                             <StyledTableCell align="right">{user.state}</StyledTableCell>
-//                             <StyledTableCell align="right">{user.zip}</StyledTableCell>
-//                             <StyledTableCell align="right">{user.phone}</StyledTableCell>
-//                             <StyledTableCell align="right">{user.birth}</StyledTableCell>
-//                             <StyledTableCell align="right">{user.socialSecurity}</StyledTableCell>
-//                             <StyledTableCell align="right">{user.preTax}</StyledTableCell>
-//                             <StyledTableCell align="right">{user.status}</StyledTableCell>
-//                         </StyledTableRow>
-//                     ))}
-//                     </TableBody>
-//                 </Table>
-//             </TableContainer>
-//             {paginationElement()}
-//         </Box>
-//     );
-// }
 
 export default SearchList;

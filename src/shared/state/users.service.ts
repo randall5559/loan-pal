@@ -21,6 +21,28 @@ export class UsersService {
     return id;
   }
 
+  /**
+   * Update a selected user information
+   *
+   * @param {User} user
+   * @memberof UsersService
+   */
+  updateUserInfo(user: User) {
+    this.usersStore.update(user.id, user);
+    firebase.database().ref('users/' + user.id).set(user);
+  }
+
+  /**
+   * Remove a user from the database
+   *
+   * @param {string} id
+   * @memberof UsersService
+   */
+  removeUser(id: string) {
+    this.usersStore.remove(id);
+    firebase.database().ref('users/' + id).remove();
+  }
+
 }
 
 export const usersService = new UsersService(usersStore);
