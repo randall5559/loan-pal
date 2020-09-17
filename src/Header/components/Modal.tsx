@@ -5,6 +5,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { Link } from "react-router-dom";
 
 const Modal = (props: any) => {
   const { classes, open, setOpen } = props;
@@ -20,6 +21,7 @@ const Modal = (props: any) => {
             label="Email Address"
             type="email"
             fullWidth
+            disabled
           />
           <TextField
             autoFocus
@@ -28,6 +30,7 @@ const Modal = (props: any) => {
             label="Password"
             type="password"
             fullWidth
+            disabled
           />
         </DialogContent>
         <DialogActions>
@@ -38,14 +41,16 @@ const Modal = (props: any) => {
           </Button>
           <Button className={classes.modalLink} onClick={() => {
               setOpen(false);
-          }} color="primary">
+          }} color="primary" disabled>
             Login
           </Button>
-          <Button className={classes.modalButton} onClick={() => {
-              setOpen(false);
-          }} color="primary" variant="contained" disableElevation>
-            Login as a Guest
-          </Button>
+          <Link className={classes.modalLink} to="/search">
+            <Button className={classes.modalButton} onClick={() => {
+                setOpen(false);
+            }} color="primary" variant="contained" disableElevation>
+              Login as a Guest
+            </Button>
+          </Link>
         </DialogActions>
       </Dialog>
   );

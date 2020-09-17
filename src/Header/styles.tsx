@@ -23,5 +23,18 @@ export const useStyles = makeStyles((theme: Theme) => ({
     button: {
         position: 'absolute',
         right: 10
+    },
+    modalButton: {
+        backgroundColor: '#B0B0B0',
+        '&:hover': {
+            backgroundColor: '#128A98',
+        }
+    },
+    modalLinkCancel: {
+        color: '#B0B0B0'
+    },
+    modalLink: {
+        textDecoration: 'none',
+        color: '#128A98'
     }
 }));
