@@ -26,7 +26,7 @@ code {
   font-size: 12px;
 }
 
-.MuiTableCell-head, .MuiInputBase-formControl, .MuiTablePagination-select {
+.MuiTableCell-head, .MuiInputBase-formControl, .MuiTablePagination-select, .MuiTypography-h6, .MuiTableCell-root {
   background: transparent !important;
   color: white !important;
 }

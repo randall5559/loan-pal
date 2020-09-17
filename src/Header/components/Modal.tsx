@@ -12,7 +12,6 @@ const Modal = (props: any) => {
 
   return (
       <Dialog className={classes.rootModal} open={open} onClose={() => setOpen(false)} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Enter your Username and Password</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus

@@ -13,14 +13,14 @@ const Landing = () => {
                     APPLY NOW GET APPROVED IN SECONDS!
                 </Typography>
             </Box>
-            <Link className={classes.link} to="/search">
-                <Button className={classes.button} variant="contained">
-                    Check Status
-                </Button>
-            </Link>
             <Link className={classes.link} to="/form">
                 <Button className={classes.button} variant="contained">
                     Apply
+                </Button>
+            </Link>
+            <Link className={classes.link} to="/search">
+                <Button className={classes.button} variant="contained">
+                    Search 
                 </Button>
             </Link>
         </Box>
