@@ -16,7 +16,10 @@ export class UsersService {
    */
   addNewUser(user: User) {
     this.usersStore.add(user);
+    this.usersStore.updateActive(user);
+    const id = this.usersStore.setActive(user.id);
     firebase.database().ref('users/' + user.id).set(user);
+    return id;
   }
 
 }
