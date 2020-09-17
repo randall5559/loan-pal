@@ -23,8 +23,6 @@ export function useSearchFacade(): HookProps {
         const dbData = [] as User[];
 
         snapshot.forEach((childSnapshot: any) => {
-            // var childKey = childSnapshot.key;
-            // var childData = childSnapshot.val();
             dbData.push(childSnapshot.val() as User)
         });
 
@@ -32,6 +30,7 @@ export function useSearchFacade(): HookProps {
             columns: [
                 { title: 'First Name', field: 'firstName' },
                 { title: 'Last Name', field: 'lastName' },
+                { title: 'Email', field: 'email' },
                 { title: 'Street', field: 'street' },
                 { title: 'City', field: 'city' },
                 { title: 'State', field: 'state' },
