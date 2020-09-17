@@ -12,6 +12,6 @@ export interface User {
     birth: string;
     socialSecurity: number; 
     preTax: string;
-    coBorrower: boolean;
+    coBorrower?: boolean;
     status?: 'approved' | 'processing' | 'unapproved';
 }

@@ -8,6 +8,10 @@ export class UsersQuery extends QueryEntity<UsersState> {
     super(store);
   }
 
+  getAllUsers() {
+    return firebase.database().ref('/users').once('value');
+  }
+
 }
 
 export const usersQuery = new UsersQuery(usersStore);
