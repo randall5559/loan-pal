@@ -20,7 +20,6 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
-import { BorderAllRounded } from '@material-ui/icons';
 
 const tableIcons = {
     Check: forwardRef((props: any, ref: any) => <Check {...props} ref={ref} />),
