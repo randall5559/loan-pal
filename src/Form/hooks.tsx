@@ -90,8 +90,6 @@ export function useFormFacade(): HookProps {
         setError(hasErrors);
         setOpenSnackBar(true);
 
-        console.log('USER:', { id, status: 'processing', ...(user as User) });
-
         if (!hasErrors) {
             setOpenBackDrop(true);
             setActive (

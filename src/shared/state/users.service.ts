@@ -1,4 +1,3 @@
-import { ID } from '@datorama/akita';
 import * as firebase from 'firebase';
 import { UsersStore, usersStore } from './users.store';
 import { User } from '../interfaces/user.interface';
