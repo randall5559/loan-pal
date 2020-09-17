@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { User } from '../shared/interfaces/user.interface';
+import { usersQuery } from '../shared/state';
 
 type HookProps = [
-    number,
-    number,
-    Function,                               
+    { data: User[], columns: any },
     Function
 ];
 
@@ -14,13 +14,44 @@ type HookProps = [
  * @return {*}  {HookProps}
  */
 export function useSearchFacade(): HookProps {
-    const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [state, setState] = React.useState({ columns: [] as any, data: [] as User[] });
+
+    const getUsers = async() => {
+        const snapshot = await usersQuery.getAllUsers();
+        const dbData = [] as User[];
+
+        snapshot.forEach((childSnapshot) => {
+            // var childKey = childSnapshot.key;
+            // var childData = childSnapshot.val();
+            dbData.push(childSnapshot.val() as User)
+        });
+
+        console.log(dbData);
+        setState({
+            columns: [
+                { title: 'First Name', field: 'firstName' },
+                { title: 'Last Name', field: 'lastName' },
+                { title: 'Street', field: 'street' },
+                { title: 'City', field: 'city' },
+                { title: 'State', field: 'state' },
+                { title: 'Zip', field: 'zip' },
+                { title: 'Phone', field: 'phone' },
+                { title: 'Birth', field: 'birth' },
+                { title: 'Social Security', field: 'socialSecurity' },
+                { title: 'Pre-Tax', field: 'preTax' },
+                { title: 'Status', field: 'status' }
+            ],
+            data: dbData
+        })
+    }
+
+    useEffect(() => {
+        getUsers();
+    }, []);
+
 
     return [
-        page, 
-        rowsPerPage, 
-        setPage,
-        setRowsPerPage
+        state,
+        setState
     ];
 }

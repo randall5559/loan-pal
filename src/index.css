@@ -19,3 +19,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.MuiPaper-elevation2, .MuiPaper-elevation2 > div, .MuiSvgIcon-root, .MuiTypography-caption, .MuiTableSortLabel-root {
+  background: transparent !important;
+  color: white !important;
+  font-size: 12px;
+}
+
+.MuiTableCell-head, .MuiInputBase-formControl {
+  background: transparent !important;
+  color: white !important;
+}
